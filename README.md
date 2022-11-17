@@ -1,4 +1,4 @@
-# c table top
+# C Table Top
 
 Board Games Written in C.
 
