@@ -4,7 +4,7 @@ Board Games Written in C.
 
 Implemented
 
--[x] General
+-[] General
   [ ] Resizable Board
   [ ] Two Player
   [ ] Player VS AI
