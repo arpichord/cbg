@@ -18,3 +18,6 @@ Implemented
 - [ ] GO
   - [ ] Rules
   - [ ] Pieces
+- [ ] Othello
+  - [ ] Rules
+  - [ ] Pieces
