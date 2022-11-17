@@ -1,6 +1,7 @@
 # C Table Top
 
 Board Games Written in C.
+For learning purposes and experience.
 
 Implemented
 - [ ] General
