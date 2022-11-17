@@ -3,7 +3,8 @@
 Board Games Written in C.
 For learning purposes and experience.
 
-Implemented
+
+Implemented:
 - [ ] General
   - [ ] Resizable Board
   - [ ] Two Player
