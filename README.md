@@ -3,7 +3,6 @@
 Board Games Written in C.
 
 Implemented
-
 - [ ] General
   - [ ] Resizable Board
   - [ ] Two Player
