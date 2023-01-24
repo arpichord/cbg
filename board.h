@@ -38,8 +38,7 @@ int remove_piece_association(Position*, Piece*);
 
 int remove_piece(Board*, Piece*);
 
-int add_piece(Board*, Piece*, int x, int y);
-int add_piece_by_type(Board*, PIECE_TYPE type, int x, int y);
+int place_piece(Board*, Piece*, int x, int y);
 
 Position* get_position(Board*, int x, int y);
 

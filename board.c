@@ -30,8 +30,8 @@ Position* get_position(Board* board, int x, int y){
 }
 
 
-int add_piece(Board* board, Piece* piece, int x, int y){
+int place_piece(Board* board, Piece* piece, int x, int y){
 
-    board->positions[x*y];    
+    get_position(board, x, y)->piece = piece;    
 
 };
