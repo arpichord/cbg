@@ -1,16 +1,46 @@
-typedef enum POSITION_TYPES{
-    AVAILABLE = 1 >> 0,
-    DANGER = 1 >> 1,
-    BLOCKED = 1 >> 2
-} POSITION_TYPE;
+#ifndef BOARD_H
+#define BOARD_H
+
+#include <stdlib.h>
+#include "piece.h"
+
+typedef enum POSITION_STATES{
+
+    POSITION_STATE_AVAILABLE = 1 >> 0,
+    POSITION_STATE_DANGER = 1 >> 1,
+    POSITION_STATE_PLACED = 1 >> 2
+    
+} POSITION_STATE;
+
 
 typedef struct {
-    POSITION_TYPE position_type;
-    
+
+    POSITION_STATE state;
+    Piece* piece;
+    Piece* piece_associations;
+
 } Position;
 
 typedef struct {
     
-
+    int width;
+    int height;
+    int position_count;
+    Position* positions;
 
 } Board;
+
+
+int setup_board(Board**, int width, int height);
+
+int add_piece_association(Position*, Piece*);
+int remove_piece_association(Position*, Piece*);
+
+int remove_piece(Board*, Piece*);
+
+int add_piece(Board*, Piece*, int x, int y);
+int add_piece_by_type(Board*, PIECE_TYPE type, int x, int y);
+
+Position* get_position(Board*, int x, int y);
+
+#endif
