@@ -1,7 +1,7 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-typedef enum PIECE_TYPES{
+typedef enum PIECE_TYPES {
 
     CHESS_PAWN,
     CHESS_KING,
@@ -12,7 +12,7 @@ typedef enum PIECE_TYPES{
 
 } PIECE_TYPE;
 
-typedef enum PLAYER_NUMBERS{
+typedef enum PLAYER_NUMBERS {
 
     PLAYER_ONE,
     PLAYER_TWO,

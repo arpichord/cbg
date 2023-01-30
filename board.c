@@ -1,13 +1,15 @@
+#include <stdio.h>
 #include "board.h"
 #include "piece.h"
 
-int setup_board(Board** board, int width, int height){
+
+int setup_board(Board** board, int width, int height) {
 
     *board = malloc(sizeof(Board));
     (*board)->height = height;
     (*board)->width = width;
     (*board)->position_count = width*height;
-    (*board)->positions = malloc(sizeof(Position)*(*board)->position_count);
+    (*board)->positions = malloc(sizeof(Position)*((*board)->position_count));
 
     Position* pos;
     for (int y = 0; y < height; y++) {
@@ -15,6 +17,7 @@ int setup_board(Board** board, int width, int height){
             
             pos = get_position((*board), x, y);
             pos->state = POSITION_STATE_AVAILABLE;
+
             pos->piece = NULL;
             pos->piece_associations = NULL;
         }
@@ -23,15 +26,20 @@ int setup_board(Board** board, int width, int height){
     return 0;
 }
 
+Position* get_position(Board* board, int x, int y) {
 
-Position* get_position(Board* board, int x, int y){
-    int mult_indexed = ((x+1)*(y+1)) - 1;
-    return &board->positions[mult_indexed];
+    int mult_indexed = board->height * y + x;
+    return &(board->positions[mult_indexed]);
+
 }
 
+int place_piece(Board* board, Piece* piece, int x, int y) {
 
-int place_piece(Board* board, Piece* piece, int x, int y){
+    Position* pos = get_position(board, x, y);
 
-    get_position(board, x, y)->piece = piece;    
+    (pos->piece) = piece;    
+    if (pos->state & POSITION_STATE_AVAILABLE == POSITION_STATE_AVAILABLE) {
+        pos->state = (pos->state & (~POSITION_STATE_AVAILABLE)) | POSITION_STATE_HAS_PIECE;
+    }
 
 };
