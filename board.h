@@ -12,7 +12,7 @@ typedef enum POSITION_STATES{
     
 } POSITION_STATE;
 
-
+    
 typedef struct {
 
     POSITION_STATE state;

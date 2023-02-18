@@ -13,15 +13,13 @@ int main(int argc, char*argv[]) {
     setup_board(&b, 8, 8);
     
     Piece* p;
-    setup_piece(&p, CHESS_PAWN, PLAYER_ONE);
+    setup_piece(&p, PIECE_CHESS_PAWN, PLAYER_TWO);
 
     place_piece(b, p, 1, 0);
 
+
+
     display(b, DISPLAY_MODE_CLI);
-    
-
-    
-
 
 
 }
