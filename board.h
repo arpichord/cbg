@@ -1,10 +1,10 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <stdlib.h>
-#include "piece.h"
+// Forward declartions
+typedef struct Piece Piece;
 
-typedef enum POSITION_STATES{
+typedef enum POSITION_STATES {
 
     POSITION_STATE_AVAILABLE = 1 >> 0,
     POSITION_STATE_DANGER = 1 >> 1,
@@ -13,7 +13,7 @@ typedef enum POSITION_STATES{
 } POSITION_STATE;
 
     
-typedef struct {
+typedef struct Position {
 
     POSITION_STATE state;
     Piece* piece;
@@ -21,7 +21,7 @@ typedef struct {
 
 } Position;
 
-typedef struct {
+typedef struct Board {
     
     int width;
     int height;
@@ -34,6 +34,7 @@ typedef struct {
 int setup_board(Board**, int width, int height);
 
 int add_piece_association(Position*, Piece*);
+
 int remove_piece_association(Position*, Piece*);
 
 int remove_piece(Board*, Piece*);

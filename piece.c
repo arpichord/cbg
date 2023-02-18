@@ -4,8 +4,10 @@
 int setup_piece(Piece** piece, PIECE_TYPE type, PLAYER_NUMBER player_number) {
     
     (*piece) = malloc(sizeof(piece));
+    (*piece)->position_associations = NULL;
     (*piece)->piece_type=type;
     (*piece)->player_number=player_number;
+
 
     return 0;
 }

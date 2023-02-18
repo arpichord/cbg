@@ -1,6 +1,9 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+// Forward declarations
+typedef struct Position Position;
+
 typedef enum PIECE_TYPES {
 
     PIECE_CHESS_PAWN,
@@ -22,10 +25,11 @@ typedef enum PLAYER_NUMBERS {
 } PLAYER_NUMBER;
 
 
-typedef struct {
+typedef struct Piece {
 
     PIECE_TYPE piece_type;
     PLAYER_NUMBER player_number;
+    Position* position_associations;
 
 } Piece;
 

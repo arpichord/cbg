@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include "piece.h"
+#include "board.h" 
 #include "display.h"
-
 
 int _display_CLI(Board* board) {
     
