@@ -17,7 +17,7 @@ typedef struct Position {
 
     POSITION_STATE state;
     Piece* piece;
-    Piece* piece_associations;
+    Piece** piece_associations;
 
 } Position;
 
