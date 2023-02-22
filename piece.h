@@ -29,7 +29,7 @@ typedef struct Piece {
 
     PIECE_TYPE piece_type;
     PLAYER_NUMBER player_number;
-    Position* position_associations;
+    Position** position_associations;
 
 } Piece;
 
