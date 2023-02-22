@@ -9,6 +9,11 @@ int _display_CLI(Board* board) {
     Position* pos;
     char print_char = CLI_UNKNOWN;
     char print_fg_color[10] = {0};
+    char print_bg_color[10] = {0};
+
+    // Set base colores
+    strcpy(print_fg_color, ANSI_COLOR_RESET);
+    strcpy(print_bg_color, ANSI_COLOR_RESET);
     
     for (int y = 0; y < board->height; y++) {
 
@@ -66,24 +71,40 @@ int _display_CLI(Board* board) {
                 }
             
 
-            if (board->selected != NULL){
+            if (board->selected != NULL) {
 
                 // Color BG Selected Data
 
-                if (get_position(board, x, y) == board->selected);
-                    
+                if (get_position(board, x, y) == board->selected) {
 
+                    strcpy(print_bg_color, SELECTED_COLOR);
+
+                }
+
+                for (int i = 0; i < get_position(board, x, y)->association_count; i++) {
+                    
+                    Association* asc = get_position(board, x, y)->associations[i];
+                  
+                    if (asc->piece == board->selected->piece) {
+
+                        if (asc->state & ASSOCIATION_STATE_VALID_MOVE == ASSOCIATION_STATE_VALID_MOVE)
+                            strcpy(print_bg_color, STATE_COLOR_VALID_MOVE);
+                            
+                    }                        
+                }
             }
             
-            printf("%s", print_fg_color);
+            printf("%s %s", print_fg_color, print_bg_color);
             printf(" %c ", print_char);
             strcpy(print_fg_color, ANSI_COLOR_RESET);
+            strcpy(print_bg_color, ANSI_COLOR_RESET);
 
         }
+
         printf("\n");
     }
 
-};
+}
 
 
 int display(Board* board, DISPLAY_MODE mode) {
@@ -93,4 +114,4 @@ int display(Board* board, DISPLAY_MODE mode) {
             _display_CLI(board);
 
     }
-};
+}

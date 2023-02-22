@@ -33,7 +33,11 @@ int update(Board* board, Piece* piece) {
                 
                 add_association(piece, get_position(board, piece->x, piece->y+1), ASSOCIATION_STATE_VALID_MOVE);
                 
+            }
 
+            if (!((get_position(board, piece->x, piece->y+2)->state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
+
+                add_association(piece, get_position(board, piece->x, piece->y+2), ASSOCIATION_STATE_VALID_MOVE);
             }
 
             break;
@@ -54,7 +58,7 @@ int remove_piece_association(Position*, Piece*) {
 }
 
 int add_association(Piece* piece, Position* pos, ASSOCIATION_STATE state) {
-    
+
     ////
     //
     //  Associations are links between pieces and positions
@@ -77,7 +81,6 @@ int add_association(Piece* piece, Position* pos, ASSOCIATION_STATE state) {
     pos->association_count+=1;
     pos->associations = realloc(pos->associations, pos->association_count*sizeof(Association*));
     pos->associations[pos->association_count-1] = asc;
-
 
     return 0; 
 }

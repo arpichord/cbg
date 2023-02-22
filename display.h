@@ -18,6 +18,11 @@ typedef struct Board Board;
 #define PLAYER_3_COLOR     "\x1b[32m"
 #define PLAYER_4_COLOR     "\x1b[35m"
 
+#define SELECTED_COLOR     "\x1b[44m"
+
+#define STATE_COLOR_VALID_MOVE  "\x1b[42m"
+
+
 typedef enum DISPLAY_MODES {
 
     DISPLAY_MODE_CLI,
@@ -25,7 +30,6 @@ typedef enum DISPLAY_MODES {
     DISPLAY_MODE_GL3D
 
 } DISPLAY_MODE;
-
 
 typedef enum CLI_CHARS {
 
@@ -36,11 +40,9 @@ typedef enum CLI_CHARS {
     CLI_CHESS_KNIGHT    = 'H',
     CLI_CHESS_ROOK      = 'R',
     CLI_CHESS_AVAILABLE = '.',
-    CLI_UNKNOWN        = '?'
+    CLI_UNKNOWN         = '?'
 
 } CLI_CHAR;
-
-
 
 int _display_CLI(Board* board);
 
