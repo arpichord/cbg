@@ -11,7 +11,12 @@ typedef struct Board Board;
 #define ANSI_COLOR_MAGENTA "\x1b[35m"
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
+#define ANSI_COLOR_BG_BLUE "\x1b[44m"
 
+#define PLAYER_1_COLOR     "\x1b[31m"
+#define PLAYER_2_COLOR     "\x1b[36m"
+#define PLAYER_3_COLOR     "\x1b[32m"
+#define PLAYER_4_COLOR     "\x1b[35m"
 
 typedef enum DISPLAY_MODES {
 

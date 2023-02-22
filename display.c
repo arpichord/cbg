@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "piece.h"
 #include "board.h" 
 #include "display.h"
@@ -7,7 +8,7 @@ int _display_CLI(Board* board) {
     
     Position* pos;
     char print_char = CLI_UNKNOWN;
-
+    char print_fg_color[10] = {0};
     
     for (int y = 0; y < board->height; y++) {
 
@@ -41,44 +42,49 @@ int _display_CLI(Board* board) {
                     case PIECE_CHESS_QUEEN:
                         print_char = CLI_CHESS_QUEEN;
                         break;
+                    }
+
+                    //
+                    // Change Color for player num
+                    //
+
+                    switch (pos->piece->player_number){
+
+                    case PLAYER_ONE:
+                        strcpy(print_fg_color, PLAYER_1_COLOR);
+                        break;
+                    case PLAYER_TWO:
+                        strcpy(print_fg_color, PLAYER_2_COLOR);
+                    break;
+                    case PLAYER_THREE:
+                        strcpy(print_fg_color, PLAYER_3_COLOR);
+                        break;
+                    case PLAYER_FOUR:
+                        strcpy(print_fg_color, PLAYER_4_COLOR);
+                        break;
+                    }
                 }
+            
 
-                //
-                // Change Color for player num
-                //
+            if (board->selected != NULL){
 
-                switch (pos->piece->player_number){
+                // Color BG Selected Data
 
-                case PLAYER_ONE:
-                    printf("%s", ANSI_COLOR_CYAN);
-                    break;
-                case PLAYER_TWO:
-                    printf("%s", ANSI_COLOR_RED);
-                   break;
-                case PLAYER_THREE:
-                    printf("%s", ANSI_COLOR_BLUE);
-                    break;
-                case PLAYER_FOUR:
-                    printf("%s", ANSI_COLOR_GREEN);
-                    break;
+                if (get_position(board, x, y) == board->selected);
                     
-                }
+
             }
             
+            printf("%s", print_fg_color);
             printf(" %c ", print_char);
-            printf("%s", ANSI_COLOR_RESET);
+            strcpy(print_fg_color, ANSI_COLOR_RESET);
+
         }
         printf("\n");
     }
 
 };
 
-
-int select_position(Board* b, int x, int y){
-    
-    
-    return 0;
-}
 
 int display(Board* board, DISPLAY_MODE mode) {
 

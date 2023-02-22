@@ -23,7 +23,7 @@ int main(int argc, char*argv[]) {
     //print_bits(get_position(b, 3, 3)->state);
 
     //set_position_state(get_position(b, 3, 3), !POSITION_STATE_HAS_PIECE);
-
+    select_position(b, 3, 3);
     display(b, DISPLAY_MODE_CLI);
 
 

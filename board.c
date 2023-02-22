@@ -32,8 +32,6 @@ int setup_board(Board** board, int width, int height) {
     }
 }
 
-
-
 Position* get_position(Board* board, int x, int y) {
 
     int mult_indexed = (board->width * y) + x;
@@ -41,3 +39,10 @@ Position* get_position(Board* board, int x, int y) {
 
 }
 
+
+int select_position(Board* b, int x, int y){
+    
+    b->selected = get_position(b, x, y);
+    
+    return 0;
+}
