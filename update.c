@@ -62,9 +62,11 @@ int add_association(Piece* piece, Position* pos, ASSOCIATION_STATE state) {
     ////
     //
     //  Associations are links between pieces and positions
-    //  Pieces and Positions share these as endpoints to suss out information conveniently
-    //  living in memory. A piece has all it
+    //  Both piecies and positions data structs have them
     //
+    //  Ultimately these are Board types, but the connection between pieces
+    //  and positions is important, and thus shared.
+    //  
     ////
 
     // create new association object
