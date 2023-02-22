@@ -28,7 +28,7 @@ int update(Board* board, Piece* piece) {
             break;
         case PIECE_CHESS_PAWN:
 
-            // If no piece, add associations
+            // If no piece, add associations ( this needs to be cleaner. Do specific maths; less long check code)
             if (!((get_position(board, piece->x, piece->y+1)->state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
                 
                 add_association(piece, get_position(board, piece->x, piece->y+1), ASSOCIATION_STATE_VALID_MOVE);
