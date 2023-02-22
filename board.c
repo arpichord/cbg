@@ -14,33 +14,30 @@ int setup_board(Board** board, int width, int height) {
 
     Position* pos;
     for (int y = 0; y < height; y++) {
+        
         for (int x = 0; x < width; x++) {
-            
+
             pos = get_position((*board), x, y);
+
             pos->state = POSITION_STATE_AVAILABLE;
 
             pos->piece = NULL;
-            pos->piece_associations = NULL;
+            pos->associations = NULL;
+            pos->association_count = 0;
+            pos->x = x;
+            pos->y = y;
+            pos->state = POSITION_STATE_AVAILABLE;
+
         }
     }
-    
-    return 0;
 }
+
+
 
 Position* get_position(Board* board, int x, int y) {
 
-    int mult_indexed = board->height * y + x;
+    int mult_indexed = (board->width * y) + x;
     return &(board->positions[mult_indexed]);
 
 }
 
-int place_piece(Board* board, Piece* piece, int x, int y) {
-
-    Position* pos = get_position(board, x, y);
-
-    (pos->piece) = piece;    
-    if (pos->state & POSITION_STATE_AVAILABLE == POSITION_STATE_AVAILABLE) {
-        pos->state = (pos->state & (~POSITION_STATE_AVAILABLE)) | POSITION_STATE_HAS_PIECE;
-    }
-
-};

@@ -3,6 +3,7 @@
 
 // Forward declarations
 typedef struct Position Position;
+typedef struct Association Association;
 
 typedef enum PIECE_TYPES {
 
@@ -29,7 +30,11 @@ typedef struct Piece {
 
     PIECE_TYPE piece_type;
     PLAYER_NUMBER player_number;
-    Position** position_associations;
+    Association** associations;
+    
+    int association_count;
+    int x;
+    int y;
 
 } Piece;
 

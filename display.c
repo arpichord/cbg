@@ -8,10 +8,11 @@ int _display_CLI(Board* board) {
     Position* pos;
     char print_char = CLI_UNKNOWN;
 
+    
     for (int y = 0; y < board->height; y++) {
 
         for (int x = 0; x < board->width; x++) {
- 
+
             pos = get_position(board, x, y);
             
             // Check if piece at location
@@ -71,6 +72,13 @@ int _display_CLI(Board* board) {
     }
 
 };
+
+
+int select_position(Board* b, int x, int y){
+    
+    
+    return 0;
+}
 
 int display(Board* board, DISPLAY_MODE mode) {
 
