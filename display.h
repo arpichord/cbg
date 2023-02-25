@@ -21,6 +21,7 @@ typedef struct Board Board;
 #define SELECTED_COLOR     "\x1b[44m"
 
 #define STATE_COLOR_VALID_MOVE  "\x1b[42m"
+#define STATE_COLOR_STRIKE      "\x1b[45m"
 
 
 typedef enum DISPLAY_MODES {

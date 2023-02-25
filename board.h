@@ -3,6 +3,8 @@
 
 // Forward declartions
 typedef struct Piece Piece;
+typedef struct Association Association;
+ 
 
 typedef enum POSITION_STATES {
 
@@ -11,23 +13,6 @@ typedef enum POSITION_STATES {
     POSITION_STATE_HAS_PIECE        = 1 << 2
     
 } POSITION_STATE;
-
-typedef enum ASSOCIATION_STATES {
-    
-    ASSOCIATION_STATE_VALID_MOVE    = 1 << 0,
-    ASSOCIATION_STATE_STRIKE        = 1 << 1,
-    ASSOCIATION_STATE_BLOCKED       = 1 << 2,
-    ASSOCIATION_STATE_HOME          = 1 << 3,
-    ASSOCIATION_STATE_NULL          = 1 << 4
-
-} ASSOCIATION_STATE;
-    
-typedef struct Association {
-
-    Piece* piece;
-    ASSOCIATION_STATE state;
-
-} Association;
 
 typedef struct Position {
 

@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "association.h"
 #include "board.h"
 #include "piece.h"
 #include "display.h"
 #include "game.h"
-#include "update.h"
+#include "debug.h"
+
 
 int main(int argc, char*argv[]) {
 
@@ -18,13 +20,22 @@ int main(int argc, char*argv[]) {
 
     place_piece(b, p, 3, 3);
 
-    update(b, p);
+    //update_associations(b, p);
 
-    //print_bits(get_position(b, 3, 3)->state);
-
-    //set_position_state(get_position(b, 3, 3), !POSITION_STATE_HAS_PIECE);
     select_position(b, 3, 3);
     display(b, DISPLAY_MODE_CLI);
 
+    for (int i = 0; i < 50000; i++){
+        add_association(p, get_position(b, 3, 3), ASSOCIATION_STATE_HOME);
+        remove_association(get_position(b, 3, 3)->associations[0]);
+    }
+
+    //remove_piece_associations(p);
+
+    print_associations(b);
+
+    //print_associations(b);
+    printf("DONE\n");
+    getchar();
 
 }

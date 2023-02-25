@@ -4,6 +4,8 @@
 // Forward declarations
 typedef struct Position Position;
 typedef struct Association Association;
+typedef struct Board Board;
+
 
 typedef enum PIECE_TYPES {
 
@@ -25,6 +27,13 @@ typedef enum PLAYER_NUMBERS {
 
 } PLAYER_NUMBER;
 
+typedef enum Y_FLIP_VALUES {
+
+    Y_FLIP_POSITIVE = 1,
+    Y_FLIP_NEGATIVE = -1,
+    Y_FLIP_NOT_SET = 10 // If you're getting values * 10, indication you forgot to set Y_FLIP explicitly for piece somehwere
+
+} Y_FLIP_VALUE;
 
 typedef struct Piece {
 
@@ -33,12 +42,19 @@ typedef struct Piece {
     Association** associations;
     
     int association_count;
+    Y_FLIP_VALUE y_flip;
     int x;
     int y;
 
 } Piece;
 
 int setup_piece(Piece** piece, PIECE_TYPE type, PLAYER_NUMBER player_number);
+int _setup_piece_chess(Piece* piece);
+
+int place_piece(Board*, Piece*, int x, int y);
+int remove_piece(Board*, Piece*);
+
+int move_piece(Board* board, Piece* piece);
 
 
 #endif

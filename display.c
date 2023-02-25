@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+
 #include "piece.h"
 #include "board.h" 
 #include "display.h"
+#include "association.h"
+
+
 
 int _display_CLI(Board* board) {
     
@@ -15,13 +19,19 @@ int _display_CLI(Board* board) {
     strcpy(print_fg_color, ANSI_COLOR_RESET);
     strcpy(print_bg_color, ANSI_COLOR_RESET);
     
+
+    printf("\n");
     for (int y = 0; y < board->height; y++) {
+
+        // Board numbering vertical
+        printf("%d ", board->height - y);
 
         for (int x = 0; x < board->width; x++) {
 
             pos = get_position(board, x, y);
             
             // Check if piece at location
+            
             if (pos->state & POSITION_STATE_AVAILABLE) {
                 
                 print_char = CLI_CHESS_AVAILABLE;
@@ -30,21 +40,32 @@ int _display_CLI(Board* board) {
 
                 switch (pos->piece->piece_type){
                     case PIECE_CHESS_PAWN:
+
                         print_char = CLI_CHESS_PAWN;
                         break;
+
                     case PIECE_CHESS_BISHOP:
+
                         print_char = CLI_CHESS_BISHOP;
                         break;
+
                     case PIECE_CHESS_KNIGHT:
+
                         print_char = CLI_CHESS_KNIGHT;
                         break;
+
                     case PIECE_CHESS_KING:
+
                         print_char = CLI_CHESS_KING;
                         break;
+
                     case PIECE_CHESS_ROOK:
+
                         print_char = CLI_CHESS_ROOK;
                         break;
+
                     case PIECE_CHESS_QUEEN:
+
                         print_char = CLI_CHESS_QUEEN;
                         break;
                     }
@@ -70,10 +91,9 @@ int _display_CLI(Board* board) {
                     }
                 }
             
-
             if (board->selected != NULL) {
 
-                // Color BG Selected Data
+                // Color BG of selected position and its associated states 
 
                 if (get_position(board, x, y) == board->selected) {
 
@@ -87,8 +107,11 @@ int _display_CLI(Board* board) {
                   
                     if (asc->piece == board->selected->piece) {
 
-                        if (asc->state & ASSOCIATION_STATE_VALID_MOVE == ASSOCIATION_STATE_VALID_MOVE)
+                        if ((asc->state & ASSOCIATION_STATE_VALID_MOVE) == ASSOCIATION_STATE_VALID_MOVE)
                             strcpy(print_bg_color, STATE_COLOR_VALID_MOVE);
+
+                        if ((asc->state & ASSOCIATION_STATE_STRIKE) == ASSOCIATION_STATE_STRIKE)
+                            strcpy(print_bg_color, STATE_COLOR_STRIKE);
                             
                     }                        
                 }
@@ -98,11 +121,24 @@ int _display_CLI(Board* board) {
             printf(" %c ", print_char);
             strcpy(print_fg_color, ANSI_COLOR_RESET);
             strcpy(print_bg_color, ANSI_COLOR_RESET);
+            printf("%s", ANSI_COLOR_RESET);
 
         }
 
-        printf("\n");
+        printf("\n\n");
     }
+
+    // Bottom Horizontal coords (currently relies on hardcoded ASCII indexing for lettering like on typical chess board)
+    
+    printf("    ");
+
+    for (int i_width = 0; i_width < board->width; i_width++) {
+        
+        printf("%c   ", 65+i_width);
+
+    }
+
+    printf("\n");
 
 }
 
@@ -112,6 +148,12 @@ int display(Board* board, DISPLAY_MODE mode) {
     switch(mode){
         case DISPLAY_MODE_CLI:
             _display_CLI(board);
+
+        case DISPLAY_MODE_GL2D:
+            break;
+        
+        case DISPLAY_MODE_GL3D:
+            break;
 
     }
 }
