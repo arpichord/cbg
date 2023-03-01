@@ -5,7 +5,7 @@
 #include "piece.h"
 
 
-int setup_board(Board** board, int width, int height) {
+int init_board(Board** board, int width, int height) {
 
     *board = malloc(sizeof(Board));
     (*board)->height = height;

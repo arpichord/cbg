@@ -36,7 +36,7 @@ typedef struct Board {
 } Board;
 
 
-int setup_board(Board**, int width, int height);
+int init_board(Board**, int width, int height);
 int deconstruct_board(Board** board);
 
 int select_position(Board* b, int x, int y);

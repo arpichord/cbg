@@ -5,7 +5,7 @@
 #include "piece.h"
 #include "board.h"
 
-int setup_piece(Piece** piece, PIECE_TYPE type, PLAYER_NUMBER player_number) {
+int init_piece(Piece** piece, PIECE_TYPE type, PLAYER_NUMBER player_number) {
     
     (*piece) = malloc(sizeof(Piece));
     (*piece)->associations = NULL;
@@ -18,12 +18,12 @@ int setup_piece(Piece** piece, PIECE_TYPE type, PLAYER_NUMBER player_number) {
     
     // Specific traits needed;
 
-    _setup_piece_chess(*piece);
+    _init_piece_chess(*piece);
 
     return 0;
 }
 
-int _setup_piece_chess(Piece *piece) {
+int _init_piece_chess(Piece *piece) {
     
     PLAYER_NUMBER pnum = piece->player_number;
 

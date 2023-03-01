@@ -48,8 +48,8 @@ typedef struct Piece {
 
 } Piece;
 
-int setup_piece(Piece** piece, PIECE_TYPE type, PLAYER_NUMBER player_number);
-int _setup_piece_chess(Piece* piece);
+int init_piece(Piece** piece, PIECE_TYPE type, PLAYER_NUMBER player_number);
+int _init_piece_chess(Piece* piece);
 
 int place_piece(Board*, Piece*, int x, int y);
 int remove_piece(Board*, Piece*);
