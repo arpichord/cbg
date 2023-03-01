@@ -13,14 +13,14 @@ int main(int argc, char*argv[]) {
 
     // Display board
     Board* b;
-    setup_board(&b, 8, 8);
+    init_board(&b, 8, 8);
     
     Piece* p;
-    setup_piece(&p, PIECE_CHESS_ROOK, PLAYER_TWO);
+    init_piece(&p, PIECE_CHESS_ROOK, PLAYER_TWO);
 
     Piece* p2;
 
-    setup_piece(&p2, PIECE_CHESS_PAWN, PLAYER_TWO);
+    init_piece(&p2, PIECE_CHESS_PAWN, PLAYER_TWO);
 
     place_piece(b, p, 3, 3);
     place_piece(b, p2, 1, 3);
