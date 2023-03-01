@@ -45,11 +45,13 @@ typedef enum Y_FLIP_VALUES {
 typedef struct Piece {
 
     PIECE_TYPE piece_type;
+    PIECE_STATE state;
     PLAYER_NUMBER player_number;
     Association** associations;
-
-    PIECE_STATE state;
     
+    Position* position;
+    Position* prev_position;
+
     int association_count;
     Y_FLIP_VALUE y_flip;
     
@@ -64,7 +66,7 @@ int _init_piece_chess(Piece* piece);
 int place_piece(Board*, Piece*, int x, int y);
 int remove_piece(Board*, Piece*);
 
-int move_piece(Board* board, Piece* piece);
+int move_piece(Board* board, Piece* piece, int x, int y);
 
 
 #endif

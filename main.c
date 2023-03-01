@@ -25,10 +25,12 @@ int main(int argc, char*argv[]) {
     place_piece(b, p, 3, 3);
     place_piece(b, p2, 1, 3);
 
-    update_associations(b, p);
-    update_associations(b, p2);
+    select_position(b, 3, 3);
+
+    move_piece(b, p2, p2->x, p2->y+1);
 
     select_position(b, 3, 3);
+
     display(b, DISPLAY_MODE_CLI);
 
     //for (int i = 0; i < 50000; i++){
@@ -41,6 +43,9 @@ int main(int argc, char*argv[]) {
     //print_associations(b);
 
     //print_associations(b);
+
+    
+
     printf("DONE\n");
     getchar();
 

@@ -160,6 +160,10 @@ int update_associations(Board* board, Piece* piece) {
                     
                     add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE);
                     
+                } else {
+
+                    add_association(piece, pos, ASSOCIATION_STATE_BLOCKED);
+
                 }
             
             }
@@ -176,6 +180,10 @@ int update_associations(Board* board, Piece* piece) {
                 if (!((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
 
                     add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE);
+
+                } else {
+
+                    add_association(piece, pos, ASSOCIATION_STATE_BLOCKED);
 
                 }
 
@@ -243,7 +251,8 @@ int update_associations(Board* board, Piece* piece) {
 
                     if (pos->piece->player_number != piece->player_number)
                         add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);
-
+                    else
+                        add_association(piece, pos, ASSOCIATION_STATE_BLOCKED);
                     break;
 
                 } else {
@@ -328,6 +337,30 @@ int update_associations(Board* board, Piece* piece) {
 
     }
 
+    return 0;
+}
 
+int update_associations_contextual(Board *board, Piece *piece) {
+
+    update_associations(board, piece);
+
+    // Current position
+
+    for (int i_asc = 0; i_asc < piece->position->association_count; i_asc++) {
+
+        update_associations(board, piece->position->associations[i_asc]->piece);
+
+    }
+
+    // Previous Position
+
+    if (piece->prev_position != NULL) {
+        for (int i_asc = 0; i_asc < piece->prev_position->association_count; i_asc++) {
+
+            update_associations(board, piece->prev_position->associations[i_asc]->piece);
+
+        }
+    }
+    
     return 0;
 }

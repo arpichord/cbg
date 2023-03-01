@@ -30,6 +30,7 @@ int add_association(Piece* piece, Position* pos, ASSOCIATION_STATE state);
 int remove_piece_associations(Piece* piece);
 
 int update_associations(Board* board, Piece* piece);
+int update_associations_contextual(Board* board, Piece* piece);
 
 int _update_position_association(Board* board, Piece* piece);
 int _update_piece_associations(Board* board, Piece* piece);

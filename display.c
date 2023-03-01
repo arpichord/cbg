@@ -115,6 +115,9 @@ int _display_CLI(Board* board) {
 
                         if ((asc->state & (ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE)) == (ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE))
                             strcpy(print_bg_color, STATE_COLOR_VALID_PLUS_STRIKE);
+                        
+                        if ((asc->state & ASSOCIATION_STATE_BLOCKED) == ASSOCIATION_STATE_BLOCKED)
+                            strcpy(print_bg_color, STATE_COLOR_BLOCKED);
                             
                     }                        
                 }
