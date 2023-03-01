@@ -15,6 +15,7 @@ Resizable, keeps track of positions. Positions are allocated upon board initiali
 ## Piece
 
 Has various associations with positions based on several states; position availability as a valid move, for example.
+Also has state, though currently only for whether or not the piece has been moved (helpful for pawn)
   
 ## Position
 
