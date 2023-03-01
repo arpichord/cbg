@@ -27,6 +27,13 @@ typedef enum PLAYER_NUMBERS {
 
 } PLAYER_NUMBER;
 
+typedef enum PIECE_STATES {
+
+    PIECE_STATE_NOT_MOVED       = 1 << 0,
+    PIECE_STATE_HAS_MOVED       = 1 << 1
+
+} PIECE_STATE;
+
 typedef enum Y_FLIP_VALUES {
 
     Y_FLIP_POSITIVE = 1,
@@ -40,9 +47,12 @@ typedef struct Piece {
     PIECE_TYPE piece_type;
     PLAYER_NUMBER player_number;
     Association** associations;
+
+    PIECE_STATE state;
     
     int association_count;
     Y_FLIP_VALUE y_flip;
+    
     int x;
     int y;
 

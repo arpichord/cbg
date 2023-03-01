@@ -15,6 +15,7 @@ int init_piece(Piece** piece, PIECE_TYPE type, PLAYER_NUMBER player_number) {
     (*piece)->y_flip = Y_FLIP_NOT_SET;
     (*piece)->piece_type=type;
     (*piece)->player_number=player_number;
+    (*piece)->state = PIECE_STATE_NOT_MOVED;
     
     // Specific traits needed;
 
