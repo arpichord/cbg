@@ -125,7 +125,7 @@ int update_associations(Board* board, Piece* piece) {
     POSITION_STATE      pos_state;
 
     // Remove piece associations
-    //remove_piece_associations(piece);
+    remove_piece_associations(piece);
 
     // Create new assocation at piece home
     add_association(piece, get_position(board, piece->x, piece->y), ASSOCIATION_STATE_HOME);
@@ -151,65 +151,174 @@ int update_associations(Board* board, Piece* piece) {
             x = piece->x;
             y = piece->y+(1*y_flip);
             
+            if (!exceeds_bounds(board, x, y)) {
+
+                pos = get_position(board, x, y);
+                pos_state = pos->state;
+
+                if (!((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
+                    
+                    add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE);
+                    
+                }
             
-            pos = get_position(board, x, y);
-            pos_state = pos->state;
-
-            if (!((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
-                
-                add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE);
-                
             }
-
+            
             // Pawn two spaces up
 
             y += 1*y_flip;
-            pos = get_position(board, x, y);
-            pos_state = pos->state;
 
-            if (!((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
+            if (!exceeds_bounds(board, x, y)) {
+            
+                pos = get_position(board, x, y);
+                pos_state = pos->state;
 
-                add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE);
+                if (!((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
+
+                    add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE);
+
+                }
+
             }
-
+            
             // Pawn attack right
 
             y = piece->y+(1*y_flip);
             x = piece->x+1;
-            pos = get_position(board, x, y);
-            pos_state = pos->state;
 
-            // add strike association regardless, but also add valid move if valid
+            if (!exceeds_bounds(board, x, y)) {
 
-            if (((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE) && pos->piece->player_number != piece->player_number){
-                
-                add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);                
+                pos = get_position(board, x, y);
+                pos_state = pos->state;
 
-            } else {
+                // add strike association regardless, but also add valid move if valid
 
-                add_association(piece, pos, ASSOCIATION_STATE_STRIKE);
+                if (((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE) && 
+                        pos->piece->player_number != piece->player_number){
+                    
+                    add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);                
 
+                } else {
+
+                    add_association(piece, pos, ASSOCIATION_STATE_STRIKE);
+
+                }
             }
 
             // Pawn attack left
 
             x = piece->x-1;
-            pos = get_position(board, x, y);
-            pos_state = pos->state;
 
-            // add strike association regardless, but also add valid move if valid
+            if (!exceeds_bounds(board, x, y)) {
 
-            if (((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE) && pos->piece->player_number != piece->player_number){
-                
-                add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);                
+                pos = get_position(board, x, y);
+                pos_state = pos->state;
 
-            } else {
+                // add strike association regardless, but also add valid move if valid
 
-                add_association(piece, pos, ASSOCIATION_STATE_STRIKE);
-                
+                if (((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE) && pos->piece->player_number != piece->player_number){
+                    
+                    add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);                
+
+                } else {
+
+                    add_association(piece, pos, ASSOCIATION_STATE_STRIKE);
+                    
+                }
+
             }
 
+            break;
+
         case PIECE_CHESS_ROOK:
+
+            // Left
+        
+            y = piece->y;
+
+            for (x = piece->x-1; x >= 0; x--) {
+
+                pos = get_position(board, x, y);
+                if (pos->state == POSITION_STATE_HAS_PIECE) {
+
+                    if (pos->piece->player_number != piece->player_number)
+                        add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);
+
+                    break;
+
+                } else {
+                    
+                    add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE | ASSOCIATION_STATE_STRIKE);
+                    
+                }
+
+            }
+
+            // Right
+
+            y = piece->y;
+
+            for (x = piece->x+1; x < board->width; x++) {
+
+                pos = get_position(board, x, y);
+                if (pos->state == POSITION_STATE_HAS_PIECE) {
+
+                    if (pos->piece->player_number != piece->player_number)
+                        add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);
+
+                    break;
+
+                } else {
+                    
+                    add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE | ASSOCIATION_STATE_STRIKE);
+                    
+                }
+
+            }
+
+            // Up
+
+            x = piece->x;
+
+            for (y = piece->y-1; y >= 0; y--) {
+
+                pos = get_position(board, x, y);
+                if (pos->state == POSITION_STATE_HAS_PIECE) {
+
+                    if (pos->piece->player_number != piece->player_number)
+                        add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);
+
+                    break;
+
+                } else {
+                    
+                    add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE | ASSOCIATION_STATE_STRIKE);
+                    
+                }
+
+            }
+
+            // Down
+
+            x = piece->x;
+
+            for (y = piece->y+1; y < board->height; y++) {
+
+                pos = get_position(board, x, y);
+                if (pos->state == POSITION_STATE_HAS_PIECE) {
+
+                    if (pos->piece->player_number != piece->player_number)
+                        add_association(piece, pos, ASSOCIATION_STATE_STRIKE | ASSOCIATION_STATE_VALID_MOVE);
+
+                    break;
+
+                } else {
+                    
+                    add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE | ASSOCIATION_STATE_STRIKE);
+                    
+                }
+
+            }
 
             break;
 

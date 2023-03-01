@@ -1,5 +1,7 @@
 #include <stdlib.h>
+#include <stdio.h>
 
+#include "display.h"
 #include "piece.h"
 #include "board.h"
 
@@ -46,9 +48,19 @@ int place_piece(Board* board, Piece* piece, int x, int y) {
     piece->x = x;
     piece->y = y;
 
+    // Ensure not exceeding board boundries
+
+    if (y >= board->height || x >= board->width || y < 0 || x < 0) {
+        
+        printf("\n%sError: Exceeded Board boundry when placing piece! \nCoords: (%d,%d)\nPiece Type: (%d)%s\n",
+        ANSI_COLOR_RED , x, y, piece->piece_type, ANSI_COLOR_RESET);
+
+    }
+
     if ((pos->state & POSITION_STATE_AVAILABLE) == POSITION_STATE_AVAILABLE) {
 
         // Set position state from available to having a piece
+
         pos->state = pos->state & ~(POSITION_STATE_AVAILABLE) | POSITION_STATE_HAS_PIECE;
 
     }

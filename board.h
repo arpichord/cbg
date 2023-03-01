@@ -43,4 +43,6 @@ int select_position(Board* b, int x, int y);
 
 Position* get_position(Board*, int x, int y);
 
+int exceeds_bounds(Board* b, int x, int y);
+
 #endif

@@ -47,3 +47,11 @@ int select_position(Board* b, int x, int y){
     
     return 0;
 }
+
+int exceeds_bounds(Board* b, int x, int y) {
+
+    if (x >= b->width || x < 0 || y >= b->height || y < 0)
+        return 1;
+
+    return 0;
+}

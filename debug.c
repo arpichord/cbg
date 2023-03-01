@@ -24,7 +24,7 @@ void print_associations(Board* board) {
     
     for (int i_pos = 0; i_pos < board->position_count; i_pos++){
         for (int i_asc = 0; i_asc < board->positions[i_pos].association_count; i_asc++) {
-            printf("\nAssociation: %p\n   Position: %d,%d\n       State: %d\n     Piece: %p\n       State: %d\n\n",
+            printf("\nAssociation: %p\n   Position: %d,%d\n       Position State: %d\n     Piece: %p\n       Association State: %d\n\n",
                 board->positions[i_pos].associations[i_asc],
                 board->positions[i_pos].x, 
                 board->positions[i_pos].y,
