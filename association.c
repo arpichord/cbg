@@ -163,7 +163,6 @@ int update_associations(Board* board, Piece* piece) {
                 } else {
 
                     add_association(piece, pos, ASSOCIATION_STATE_BLOCKED);
-
                 }
             
             }
@@ -172,19 +171,23 @@ int update_associations(Board* board, Piece* piece) {
 
             y += 1*y_flip;
 
+
             if (!exceeds_bounds(board, x, y)) {
             
                 pos = get_position(board, x, y);
                 pos_state = pos->state;
 
-                if (!((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
+                if ((piece->state & PIECE_STATE_NOT_MOVED) == PIECE_STATE_NOT_MOVED){
 
-                    add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE);
+                    if (!((pos_state & POSITION_STATE_HAS_PIECE) == POSITION_STATE_HAS_PIECE)) {
 
-                } else {
+                        add_association(piece, pos, ASSOCIATION_STATE_VALID_MOVE);
 
-                    add_association(piece, pos, ASSOCIATION_STATE_BLOCKED);
+                    } else {
 
+                        add_association(piece, pos, ASSOCIATION_STATE_BLOCKED);
+
+                    }
                 }
 
             }

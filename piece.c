@@ -114,6 +114,7 @@ int move_piece(Board* board, Piece* piece, int x, int y) {
             piece->position = get_position(board, x, y);
             piece->position->piece = piece;
             piece->position->state = piece->position->state & ~(POSITION_STATE_AVAILABLE) | POSITION_STATE_HAS_PIECE;
+            piece->state = piece->state & ~(PIECE_STATE_NOT_MOVED) | PIECE_STATE_HAS_MOVED;
             piece->prev_position = old_position;
 
             piece->x = x;

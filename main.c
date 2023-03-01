@@ -28,6 +28,7 @@ int main(int argc, char*argv[]) {
     select_position(b, 1, 3);
 
     move_piece(b, p2, p2->x, p2->y+1);
+    move_piece(b, p2, p2->x, p2->y+2);
 
     //select_position(b, 3, 3);
 
