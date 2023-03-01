@@ -89,6 +89,9 @@ int place_piece(Board* board, Piece* piece, int x, int y) {
 
 int move_piece(Board* board, Piece* piece, int x, int y) {
 
+    Association* assocation;
+    ASSOCIATION_STATE state;
+
     if (exceeds_bounds(board, x, y))
         return 0;
 
@@ -96,10 +99,15 @@ int move_piece(Board* board, Piece* piece, int x, int y) {
 
     for (int i_asc = 0; i_asc < piece->association_count; i_asc++) {
 
-        ASSOCIATION_STATE state = piece->associations[i_asc]->state;
+        assocation = piece->associations[i_asc];
+        state = assocation->state;
+        
+        if (!(assocation->position->x == x && assocation->position->y == y))
+            continue;
+
 
         if ((state & ASSOCIATION_STATE_VALID_MOVE) == ASSOCIATION_STATE_VALID_MOVE) {
-            
+            printf("TRUE\n");
             old_position->piece = NULL;
             old_position->state = old_position->state & ~(POSITION_STATE_HAS_PIECE) | POSITION_STATE_AVAILABLE;
 
